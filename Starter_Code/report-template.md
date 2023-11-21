@@ -1,31 +1,40 @@
 # Module 12 Report Template
 
-## Overview of the Analysis
+The factors considered inthe analysis are:
 
-In this section, describe the analysis you completed for the machine learning models used in this Challenge. This might include:
+* size of the loan
+* borrower income
+* interest rate
+* DTI ratio
+* Number of accounts held by borrower
+* Derogatory marks on the borrower
+* debt
 
-* Explain the purpose of the analysis.
-* Explain what financial information the data was on, and what you needed to predict.
-* Provide basic information about the variables you were trying to predict (e.g., `value_counts`).
-* Describe the stages of the machine learning process you went through as part of this analysis.
-* Briefly touch on any methods you used (e.g., `LogisticRegression`, or any resampling method).
+The dataset (77,536 data points) was split into training and testing sets. The training set was used to build an initial logistic regression model (Logistic Regression Model 1) using the LogisticRegression module from scikit-learn. Logistic Regression Model 1 was then applied to the testing dataset. The purpose of the model was to determine whether a loan to the borrower in the testing set would be low- or high-risk and results are summarized below.
+
+This intial model was drawing from a dataset that had 75,036 low-risk loan data points and 2,500 high-risk data points. To resample the training data and ensure that the logistic regression model had an equal number of data points to draw from, the training set data was resampled with the RandomOverSampler module from imbalanced-learn. This generated 56,277 data points for both low-risk (0) and high-risk (1) loans, based on the original dataset.
+
+The resampled data was used to build a new logistic regression model (Logistic Regression Model 2). The purpose of Logistic Regression Model 2 was to determine whether a loan to the borrower in the testing set would be low- or high-risk. The results are summarized below.
+
 
 ## Results
 
 Using bulleted lists, describe the balanced accuracy scores and the precision and recall scores of all machine learning models.
 
 * Machine Learning Model 1:
-  * Description of Model 1 Accuracy, Precision, and Recall scores.
-
-
+  * 93% Precision. This is an average between low-risk loans and high-risk loans. low-risk being 100% andhigh being 87%
+  * 94% Accuracy
+  * 95% Recall. An average between 100% low-risk and 89% high-risk predictions.
 
 * Machine Learning Model 2:
-  * Description of Model 2 Accuracy, Precision, and Recall scores.
+  * 93% precision. Average between low-risk 100% and 87% high-risk
+  * 100% Accuracy
+  * 100% Recall
 
 ## Summary
 
-Summarize the results of the machine learning models, and include a recommendation on the model to use, if any. For example:
-* Which one seems to perform best? How do you know it performs best?
-* Does performance depend on the problem we are trying to solve? (For example, is it more important to predict the `1`'s, or predict the `0`'s? )
+Model 2 predicted more false positives, meaning low-risk when the actual was high-risk based on confusion matrices. However, model 2 is less likely to predict false negatives.
 
-If you do not recommend any of the models, please justify your reasoning.
+Model 2 had fewer false predictions and would be the best one to use however neither model scored above 90% precision. That said, I would suggest model 2 as it predicted less false positives.
+
+
